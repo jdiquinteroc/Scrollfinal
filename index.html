@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El scroll que me explica el scroll final</title>
+
+  <!-- 🖋️ Estilo visual -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #000000, #857d7d);
+      color: #e6e2e2;
+      overflow-x: hidden;
+      scroll-behavior:smooth;
+    }
+    section {
+      min-height: 100vh;
+      padding: 5rem 10%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+    }
+    h1, h2 { text-align:center; }
+    h1 { font-size: 3rem; color: #f7df06; margin-bottom: 2rem; }
+    h2 { font-size: 2rem; color: #f7d829; margin-bottom: 1rem; }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .pdf-button {
+      display: inline-block;
+      margin: 2rem auto;
+      background-color: #c7c4b8;
+      color: #000;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .pdf-button:hover { background-color: #ffd633; }
+    .tiktok-container { display: flex; justify-content: center; margin-top: 2rem; }
+    section:nth-child(even) { background: #111; }
+
+    /* 🐍 SNAKE */
+    #snake-game { display: flex; flex-direction: column; align-items: center; }
+    canvas { background: #000; border: 3px solid #22b6e7; margin-top: 20px; }
+    #score { font-size: 1.5rem; margin-top: 15px; color: #ecece9; }
+    #restartBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #eef3f3;/*Botín de reinicio*/
+      color: #c51d1d; 
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: none;
+    }
+    #restartBtn:hover { background-color: #dfe3e4; }
+    #gameOverMsg {
+      font-size: 1.3rem;
+      color: #ff5555;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<!-- 🔘 Botón para mostrar la línea del tiempo -->
+<section id="boton-linea-tiempo" style="text-align:center; margin:60px 0;">
+<h1>La imitatio</h1>
+<p>Línea del tiempo sencilla que nos muestra cómo antes de la capitalización de la cultura la imitación no era un perjuicio económico sino una forma de admirar a alguien.</p>
+<div style="margin-top: 50px;"></div>
+
+<button id="mostrarLineaBtn" 
+          style="background-color:#ffd166; color:#0f1724; padding:12px 28px; font-size:1rem; border:none; border-radius:8px; cursor:pointer; transition:all 0.3s ease;">
+    📜 Ver línea del tiempo de la imitatio
+  </button>
+</section>
+
+<!-- 🌙 Contenedor oculto de la línea del tiempo -->
+<section id="linea-tiempo-container" style="display:none;">
+  <iframe src="linea_tiempo_imitatio.html" 
+          title="Línea del tiempo de la imitatio" 
+          width="100%" height="950px"
+          style="border:none; border-radius:20px; box-shadow:0 0 25px rgba(0,0,0,0.3);"></iframe>
+</section>
+
+<script>
+  // Mostrar/ocultar la línea del tiempo con animación suave
+  document.getElementById("mostrarLineaBtn").addEventListener("click", function() {
+    const cont = document.getElementById("linea-tiempo-container");
+    if(cont.style.display === "none"){
+      cont.style.display = "block";
+      gsap.fromTo(cont, 
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
+      );
+      this.textContent = "❌ Ocultar línea del tiempo";
+    } else {
+      gsap.to(cont, { opacity: 0, y: 50, duration: 0.6, ease: "power2.in", onComplete: () => cont.style.display = "none" });
+      this.textContent = "📜 Ver línea del tiempo de la imitatio";
+    }
+  });
+</script>
+
+  <!-- 🎬 INTRO -->
+  <section id="intro">
+    <h1>El scroll que me explica el scroll final</h1>
+    <p>Esta es una muestra muy pequeña del formato que quiero que intenten hacer para su trabajo final. Ten en cuenta la rúbrica y todo lo que menciono en este scroll.</p>
+    <a href="Rúbrica -Trabajo final.pdf" class="pdf-button" download>📥 Descargar rúbrica en PDF</a>
+  </section>
+
+  <!-- 🎨 ESTILO -->
+  <section id="style">
+    <h2>1. Desarrollo de un estilo propio</h2>
+    <p>Recuerden a Baricco, de quien hablamos hoy, la imitatio del renacimiento y lo que usted es o intenta ser. Esfuércese por plasmar eso en este trabajo. No solo en la página web, sino también en los productos audiovisuales que integre, incluso en el juego que embeba en la página.</p>
+    <div style="height: 50px;"></div>
+    <!-- 🖼 Galería de imágenes -->
+<div class="galeria">
+     <img src="https://cms.anagrama-ed.es/uploads/media/autores/0001/29/thumb_28456_autores_big.jpeg" alt="Baricco">
+    <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*fkvs44eOMk_tHKJtlGpOmQ.jpeg" alt="Imitatio">
+    <img src="https://pbs.twimg.com/profile_images/1753922705651372032/uMMpTiOC_400x400.jpg" alt="Yo">
+  </div>
+</section>
+
+<style>
+  #galeria {    
+    background: #111;
+    color: #f5f5f5;
+    padding: 3rem 10%;
+    text-align: center;
+  }
+
+  /* Usamos grid para que las tres imágenes se alineen */
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  /* Estilo uniforme de las imágenes */
+  .galeria img {
+    width: 100%;
+    height: 300px;              /* 🔹 Todas tendrán la misma altura */
+    object-fit: cover;          /* 🔹 Recorta proporcionalmente sin deformar */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .galeria img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(255, 204, 0, 0.6);
+  }
+</style>
+
+
+  <!-- 🎥 TIKTOK -->
+  <section id="tiktok">
+    <h2>2. Anímense a hacer un TikTok (admitan que han querido hacerlo)</h2>
+    <p>Ojalá sea de algo que les guste, ojalá sea creativo y ojalá pueda ver a cada uno en él. No hay formatos, duración, nada. Lo que ustedes crean que vale la pena. Yo pongo este porque me dio risa. 
+      <blockquote class="tiktok-embed"
+        cite="https://www.tiktok.com/@eldogor777/video/7559058541441568022"
+        data-video-id="7559058541441568022"
+        style="max-width: 325px; min-width: 225px;">
+        <section></section>
+      </blockquote>
+    </div>
+    <script async src="https://www.tiktok.com/embed.js"></script>
+  </section>
+
+  <!-- 🐍 SNAKE -->
+  <section id="snake-game">
+    <h2>3. Un juego es obligatorio</h2>
+    <p>Puse un snake porque es sencillo y a mí me divierte, pero hay muchos otros que son también de código sencillo. No les estoy pidiendo un GTA.</p>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="score">Puntaje: 0</div>
+    <div id="gameOverMsg">💀 ¡Perdiste! Intenta de nuevo.</div>
+    <button id="restartBtn">🔁 Reiniciar</button>
+  </section>
+
+  <!-- 🧠 LÓGICA SNAKE -->
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const box = 20;
+    let snake, direction, food, score, game;
+    const scoreDisplay = document.getElementById("score");
+    const restartBtn = document.getElementById("restartBtn");
+    const gameOverMsg = document.getElementById("gameOverMsg");
+
+    // Inicia el juego
+    function init() {
+      snake = [{ x: 9 * box, y: 10 * box }];
+      direction = "RIGHT";
+      food = {
+        x: Math.floor(Math.random() * 19 + 1) * box,
+        y: Math.floor(Math.random() * 19 + 1) * box
+      };
+      score = 0;
+      scoreDisplay.textContent = "Puntaje: 0";
+      gameOverMsg.style.display = "none";
+      restartBtn.style.display = "none";
+      clearInterval(game);
+      game = setInterval(draw, 120);
+    }
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.keyCode;
+      if (key == 37 && direction != "RIGHT") direction = "LEFT";
+      else if (key == 38 && direction != "DOWN") direction = "UP";
+      else if (key == 39 && direction != "LEFT") direction = "RIGHT";
+      else if (key == 40 && direction != "UP") direction = "DOWN";
+    });
+
+    function draw() {
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = i == 0 ? "#00bcd4" : "#ffcc00";
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+      }
+
+      ctx.fillStyle = "#ff0000";
+      ctx.fillRect(food.x, food.y, box, box);
+
+      let snakeX = snake[0].x;
+      let snakeY = snake[0].y;
+
+      if (direction == "LEFT") snakeX -= box;
+      if (direction == "UP") snakeY -= box;
+      if (direction == "RIGHT") snakeX += box;
+      if (direction == "DOWN") snakeY += box;
+
+      // Comer
+      if (snakeX == food.x && snakeY == food.y) {
+        score++;
+        scoreDisplay.textContent = "Puntaje: " + score;
+        food = {
+          x: Math.floor(Math.random() * 19 + 1) * box,
+          y: Math.floor(Math.random() * 19 + 1) * box
+        };
+      } else {
+        snake.pop();
+      }
+
+      const newHead = { x: snakeX, y: snakeY };
+
+      if (
+        snakeX < 0 || snakeX >= canvas.width ||
+        snakeY < 0 || snakeY >= canvas.height ||
+        collision(newHead, snake)
+      ) {
+        clearInterval(game);
+        gameOverMsg.style.display = "block";
+        restartBtn.style.display = "block";
+        return;
+      }
+
+      snake.unshift(newHead);
+    }
+
+    function collision(head, array) {
+      return array.some(seg => head.x == seg.x && head.y == seg.y);
+    }
+
+    restartBtn.addEventListener("click", init);
+
+    init(); // inicia el juego al cargar
+  </script>
+</body>
+</html>
